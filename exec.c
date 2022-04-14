@@ -102,6 +102,8 @@ exec(char *path, char **argv)
   switchuvm(curproc);
   freevm(oldpgdir);
   return 0;
+  
+
 
  bad:
   if(pgdir)

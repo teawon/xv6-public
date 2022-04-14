@@ -35,10 +35,11 @@ struct {
   struct buf head;
 } bcache;
 
+
 void
 binit(void)
 {
-  struct buf *b;
+	struct buf *b;
 
   initlock(&bcache.lock, "bcache");
 

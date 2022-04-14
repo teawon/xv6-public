@@ -22,6 +22,7 @@ fileinit(void)
   initlock(&ftable.lock, "ftable");
 }
 
+
 // Allocate a file structure.
 struct file*
 filealloc(void)
