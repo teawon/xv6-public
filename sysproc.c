@@ -7,6 +7,14 @@
 #include "mmu.h"
 #include "proc.h"
 
+
+int
+sys_myps(void)
+{
+  return myps();
+}
+
+
 int
 sys_fork(void)
 {

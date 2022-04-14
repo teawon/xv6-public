@@ -26,6 +26,37 @@ pinit(void)
   initlock(&ptable.lock, "ptable");
 }
 
+int
+myps()
+{
+	struct proc *p;
+	acquire(&ptable.lock);
+	cprintf("pid \t ppid \t name \t state \t\t memory_size\n");
+	
+
+	for(p = ptable.proc; p< &ptable.proc[NPROC]; p++){
+		if(p->state == RUNNING) {
+			cprintf("%d \t %d \t %s \t RUNNING \t %dbyte\n",p->pid,p->parent->pid,p->name,p->sz);
+		}
+		else if(p->state == RUNNABLE){
+			cprintf("%d \t %d \t %s \t RUNNABLE \t %dbyte\n",p->pid,p->parent->pid,p->name,p->sz);
+		}
+		else if(p->state == SLEEPING){
+			cprintf("%d \t %d \t %s \t SLEEPING \t %dbyte\n",p->pid,p->parent->pid,p->name,p->sz);
+		}
+		else if(p->state == EMBRYO){
+			cprintf("%d \t %d \t %s \t EMBRYO \t %dbyte\n",p->pid,p->parent->pid,p->name,p->sz);
+		}
+		else if(p->state == ZOMBIE){
+			cprintf("%d \t %d \t %s \t ZOMBIE \t %dbyte\n",p->pid, p->parent->pid, p->name,p->sz);
+		}
+	}
+
+	release(&ptable.lock);
+	return 22;
+}
+
+
 // Must be called with interrupts disabled
 int
 cpuid() {

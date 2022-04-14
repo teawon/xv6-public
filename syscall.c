@@ -81,7 +81,7 @@ argstr(int n, char **pp)
     return -1;
   return fetchstr(addr, pp);
 }
-
+extern int sys_myps(void);
 extern int sys_chdir(void);
 extern int sys_close(void);
 extern int sys_dup(void);
@@ -105,6 +105,7 @@ extern int sys_write(void);
 extern int sys_uptime(void);
 
 static int (*syscalls[])(void) = {
+[SYS_myps]    sys_myps,
 [SYS_fork]    sys_fork,
 [SYS_exit]    sys_exit,
 [SYS_wait]    sys_wait,
